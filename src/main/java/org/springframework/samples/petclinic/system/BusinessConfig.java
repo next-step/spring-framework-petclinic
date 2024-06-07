@@ -79,9 +79,6 @@ public class BusinessConfig {
 
         @Bean
         public JdbcClient jdbcClient() {
-            // JdbcClient 클래스의 생성자나 팩토리 메서드를 사용하여 인스턴스를 생성하고 반환합니다.
-            // 이 예제에서는 JdbcClient 클래스의 기본 생성자를 호출하고 있습니다.
-            // 실제 JdbcClient 클래스의 인스턴스를 생성하는 방법은 해당 클래스의 구현에 따라 다를 수 있습니다.
             return JdbcClient.create(dataSource);
         }
 
