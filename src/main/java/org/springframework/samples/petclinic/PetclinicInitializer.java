@@ -15,14 +15,16 @@
  */
 package org.springframework.samples.petclinic;
 
+import jakarta.servlet.Filter;
+import jakarta.servlet.ServletContext;
+import org.springframework.samples.petclinic.system.BusinessConfig;
+import org.springframework.samples.petclinic.system.MvcCoreConfig;
+import org.springframework.samples.petclinic.system.ToolsConfig;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
-
-import jakarta.servlet.Filter;
-import jakarta.servlet.ServletContext;
 
 
 /**
@@ -53,16 +55,16 @@ public class PetclinicInitializer extends AbstractDispatcherServletInitializer {
 
     @Override
     protected WebApplicationContext createRootApplicationContext() {
-        XmlWebApplicationContext rootAppContext = new XmlWebApplicationContext();
-        rootAppContext.setConfigLocations("classpath:spring/business-config.xml", "classpath:spring/tools-config.xml");
+        AnnotationConfigWebApplicationContext rootAppContext = new AnnotationConfigWebApplicationContext();
+        rootAppContext.register(BusinessConfig.class, ToolsConfig.class);
         rootAppContext.getEnvironment().setDefaultProfiles(SPRING_PROFILE);
         return rootAppContext;
     }
 
     @Override
     protected WebApplicationContext createServletApplicationContext() {
-        XmlWebApplicationContext webAppContext = new XmlWebApplicationContext();
-        webAppContext.setConfigLocation("classpath:spring/mvc-core-config.xml");
+        AnnotationConfigWebApplicationContext webAppContext = new AnnotationConfigWebApplicationContext();
+        webAppContext.register(MvcCoreConfig.class);
         return webAppContext;
     }
 

@@ -15,6 +15,8 @@
  */
 package org.springframework.samples.petclinic.service;
 
+import org.springframework.samples.petclinic.system.BusinessConfig;
+import org.springframework.samples.petclinic.system.DataSourceConfig;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
@@ -26,7 +28,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
  * @see AbstractClinicServiceTests AbstractClinicServiceTests for more details. </p>
  */
 
-@SpringJUnitConfig(locations = {"classpath:spring/business-config.xml"})
+@SpringJUnitConfig(classes = {BusinessConfig.class, DataSourceConfig.class})
 @ActiveProfiles("jdbc")
 class ClinicServiceJdbcTests extends AbstractClinicServiceTests {
 
